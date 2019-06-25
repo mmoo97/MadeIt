@@ -6,7 +6,6 @@ android {
     defaultConfig {
         applicationId "com.example.madeit"
         minSdkVersion 21
-        75cab7296fbedb18389192d07ed55aaeb0d50c9e
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"

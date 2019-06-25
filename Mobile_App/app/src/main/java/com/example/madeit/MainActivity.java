@@ -1,10 +1,9 @@
 package com.example.madeit;
 
-<<<<<<< HEAD
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-=======
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
->>>>>>> 75cab7296fbedb18389192d07ed55aaeb0d50c9e
 
 public class MainActivity extends AppCompatActivity {
 
