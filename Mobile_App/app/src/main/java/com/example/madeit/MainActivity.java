@@ -3,6 +3,7 @@ package com.example.madeit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +15,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.madeit.ui.login.LoginActivity;
+
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,11 +60,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 Toast.makeText(this, "Settings Menu", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.item2:
-                Toast.makeText(this, "Item 2", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(this, LoginActivity.class);
+                startActivity(intent2);
+                Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.item3:
