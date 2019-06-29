@@ -8,7 +8,7 @@ db = "UserInfo.db"
 con = lite.connect(db)
 
 
-def deleteAllFriend(user_email, friend_email):
+def deleteAllFriends(user_email, friend_email):
     table = "Users"
 
     with con:
@@ -16,17 +16,7 @@ def deleteAllFriend(user_email, friend_email):
 
         if checkEmail(table, friend_email)[0]:
             # get the users friends
-            user_friends = cur.execute("SELECT Friends FROM {} WHERE Email = '{}';".format(table,user_email))
-            user_friends = user_friends.fetchone()[0]
-
-            # get new friend's ID
-            friendID = checkEmail(table,friend_email)[1]
-
-            # add new friend to all friends
-            user_friends = str(user_friends)+"_"+str(friendID)
-
-            if user_friends[0] == "_":
-                user_friends = user_friends[1:]
+            user_friends = ""
 
 
             # Insert updated friends to user
@@ -37,12 +27,9 @@ def deleteAllFriend(user_email, friend_email):
 
 
 #Demo Cases
-# print(addFriend("c@gmail.com","s@gmail.com"))
-# print(addFriend("c@gmail.com","i@gmail.com"))
-# print(addFriend("c@gmail.com","d@gmail.com"))
+print(deleteAllFriends("c@gmail.com","s@gmail.com"))
+# print(deleteAllFriends("c@gmail.com","i@gmail.com"))
+# print(deleteAllFriends("c@gmail.com","d@gmail.com"))
 
-# if not friend in table - return false
-
-# if in table - get friend id - add friend id to user's friend list - return true
 
 
