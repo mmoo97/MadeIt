@@ -38,12 +38,3 @@ def addFriend(user_email, friend_email):
 
 
 # print(addFriend("i@gmail.com","d@gmail.com"))
-
-
-    # if not friend in table - return false
-
-
-
-    # if in table - get friend id - add friend id to user's friend list - return true
-
-
