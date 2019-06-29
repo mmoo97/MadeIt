@@ -38,8 +38,4 @@ def deleteFriend(user_email, friend_email):
 # print(deleteFriend("c@gmail.com","i@gmail.com"))
 # print(deleteFriend("c@gmail.com","d@gmail.com"))
 
-# if not friend in table - return false
-
-# if in table - get friend id - add friend id to user's friend list - return true
-
 
