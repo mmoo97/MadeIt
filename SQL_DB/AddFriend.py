@@ -22,6 +22,8 @@ def addFriend(user_email, friend_email):
 
             # get new friend's ID
             friendID = checkEmail(table,friend_email)[1]
+            if friendID[0] == "_":
+                friendID = friendID[1:]
 
             # add new friend to all friends
             user_friends = str(user_friends)+"_"+str(friendID)
@@ -33,7 +35,7 @@ def addFriend(user_email, friend_email):
             return False
 
 
-print(addFriend("c@gmail.com","j@gmail.com"))
+print(addFriend("i@gmail.com","s@gmail.com"))
 
 
     # if not friend in table - return false
