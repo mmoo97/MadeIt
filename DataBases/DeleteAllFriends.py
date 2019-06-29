@@ -27,7 +27,7 @@ def deleteAllFriends(user_email, friend_email):
 
 
 #Demo Cases
-print(deleteAllFriends("c@gmail.com","s@gmail.com"))
+# print(deleteAllFriends("c@gmail.com","s@gmail.com"))
 # print(deleteAllFriends("c@gmail.com","i@gmail.com"))
 # print(deleteAllFriends("c@gmail.com","d@gmail.com"))
 
