@@ -22,11 +22,13 @@ def addFriend(user_email, friend_email):
 
             # get new friend's ID
             friendID = checkEmail(table,friend_email)[1]
-            if friendID[0] == "_":
-                friendID = friendID[1:]
+
 
             # add new friend to all friends
             user_friends = str(user_friends)+"_"+str(friendID)
+            if user_friends[0] == "_":
+                user_friends = user_friends[1:]
+
 
             # Insert updated friends to user
             cur.execute("UPDATE {} Set Friends = '{}' WHERE Email = '{}';".format(table, user_friends, user_email))
@@ -35,7 +37,7 @@ def addFriend(user_email, friend_email):
             return False
 
 
-print(addFriend("i@gmail.com","s@gmail.com"))
+print(addFriend("i@gmail.com","d@gmail.com"))
 
 
     # if not friend in table - return false
