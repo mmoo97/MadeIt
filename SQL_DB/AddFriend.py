@@ -37,7 +37,7 @@ def addFriend(user_email, friend_email):
             return False
 
 
-print(addFriend("i@gmail.com","d@gmail.com"))
+# print(addFriend("i@gmail.com","d@gmail.com"))
 
 
     # if not friend in table - return false
