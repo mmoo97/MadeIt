@@ -43,8 +43,6 @@ def createUser(username, password, email):
             id = 1
 
         # check to see if the user is already in the db
-        print(checkEmail(table,email))
-
         if checkEmail(table, email)[0]:
             return False
 
@@ -53,7 +51,7 @@ def createUser(username, password, email):
         return True
 
 
-# print(createUser("Tony", "password", "ton1@gmail.com"))
+print(createUser("Johnny", "password", "j@gmail.com"))
 
 
 def createSampleUsers():
@@ -63,3 +61,6 @@ def createSampleUsers():
     createUser("Curt", "password", "c@gmail.com")
     createUser("Daniel", "password", "d@gmail.com")
     createUser("Mitchell", "password", "m@gmail.com")
+    createUser("Tony", "password", "t@gmail.com")
+
+# createSampleUsers()
