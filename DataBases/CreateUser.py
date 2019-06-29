@@ -30,9 +30,6 @@ def insert(table, id_num, name, email, password, pin, phone, friends, connection
     """
     with con:
         cur = con.cursor()
-        # num = cur.execute("SELECT MAX(Id) FROM "+str(table))
-        # print(num.fetchone()[0])
-
         cur.execute("INSERT INTO "+str(table)+" VALUES("+str(id_num)+",'"+str(name)+"', '"+str(email)+"', '"
                     + str(password)+"', "+str(pin)+", "+str(phone)+", '"+str(friends)+"', '"+str(connection)+"')")
 
@@ -59,7 +56,7 @@ def createUser(username, password, email):
         except TypeError:
             id = 1
 
-        if checkEmail(table, email):
+        if checkEmail(table, email)[0]:
             return False
 
         insert(table, id, username, email, password, pin, phone, friends, connectionInfo)
@@ -72,6 +69,8 @@ def createSampleDemo():
     createUser("Curt", "password", "c@gmail.com")
     createUser("Daniel", "password", "d@gmail.com")
     createUser("Mitchell", "password", "m@gmail.com")
+
+# createSampleDemo()
 
 
 
