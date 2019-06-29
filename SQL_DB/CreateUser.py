@@ -4,7 +4,8 @@
 
 import sqlite3 as lite
 
-# import sys
+from Variables import *
+from CheckEmail import checkEmail
 
 
 # connect to database with sqlite
@@ -26,11 +27,11 @@ def insert(table, id_num, name, email, password, pin, phone, friends, connection
 
 def createUser(username, password, email):
     # edit the table name here if we change it in the database
-    table = "Users"
-    pin = 1234
-    phone = 1112223333
-    friends = ""
-    connectionInfo = "NoneYet"
+    # table = "Users"
+    # pin = 1234
+    # phone = 1112223333
+    # friends = ""
+    # connectionInfo = "NoneYet"
 
     with con:
         cur = con.cursor()
@@ -41,8 +42,18 @@ def createUser(username, password, email):
         except TypeError:
             id = 1
 
-        insert(table, id, username, email, password, pin, phone, friends, connectionInfo)
+        # check to see if the user is already in the db
+        print(checkEmail(table,email))
 
+        if checkEmail(table, email)[0]:
+            return False
+
+        # if the user isn't in db, add them
+        insert(table, id, username, email, password, pin, phone, friends, connectionInfo)
+        return True
+
+
+# print(createUser("Tony", "password", "ton1@gmail.com"))
 
 
 def createSampleUsers():
