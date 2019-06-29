@@ -8,13 +8,13 @@ db = "UserInfo.db"
 con = lite.connect(db)
 
 
-def deleteAllFriends(user_email, friend_email):
+def deleteAllFriends(user_email):
     table = "Users"
 
     with con:
         cur = con.cursor()
 
-        if checkEmail(table, friend_email)[0]:
+        if checkEmail(table, user_email)[0]:
             # get the users friends
             user_friends = ""
 
@@ -27,9 +27,8 @@ def deleteAllFriends(user_email, friend_email):
 
 
 #Demo Cases
-# print(deleteAllFriends("c@gmail.com","s@gmail.com"))
-# print(deleteAllFriends("c@gmail.com","i@gmail.com"))
-# print(deleteAllFriends("c@gmail.com","d@gmail.com"))
+# print(deleteAllFriends("c@gmail.com"))
+
 
 
 
