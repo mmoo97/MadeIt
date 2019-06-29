@@ -1,9 +1,7 @@
-# The
+# Add a friends ID to the Frei
 
 import sqlite3 as lite
 from CheckEmail import checkEmail
-
-# import sys
 
 
 # connect to database with sqlite
@@ -14,15 +12,28 @@ con = lite.connect(db)
 def addFriend(user_email, friend_email):
     table = "Users"
 
-    checkEmail("c@gmail.com")
+    with con:
+        cur = con.cursor()
 
-    # check if friend is in table
-    # try:
-    #     num = cur.execute("SELECT MAX(Id) FROM " + str(table))
-    #     id = num.fetchone()[0] + 1
-    # except TypeError:
-        id = 1
+        if checkEmail(table, friend_email)[0]:
+            # get the users friends
+            user_friends = cur.execute("SELECT Friends FROM {} WHERE Email = '{}';".format(table,user_email))
+            user_friends = user_friends.fetchone()[0]
 
+            # get new friend's ID
+            friendID = checkEmail(table,friend_email)[1]
+
+            # add new friend to all friends
+            user_friends = str(user_friends)+"_"+str(friendID)
+
+            # Insert updated friends to user
+            cur.execute("UPDATE {} Set Friends = '{}' WHERE Email = '{}';".format(table, user_friends, user_email))
+            return True
+        else:
+            return False
+
+
+print(addFriend("c@gmail.com","j@gmail.com"))
 
 
     # if not friend in table - return false
