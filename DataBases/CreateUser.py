@@ -2,13 +2,17 @@
 # Functions will be created for all anticipated interactions
 # Please add doc strings to any added tools or updates
 
-import sqlite3 as lite
-# import sys
 
+# todo: Check if email already exists, if so dont allow creation
+
+import sqlite3 as lite
+from CheckEmail import checkEmail
+from Variables import *
 
 # connect to database with sqlite
 db = "UserInfo.db"
 con = lite.connect(db)
+
 
 def insert(table, id_num, name, email, password, pin, phone, friends, connection):
     """
@@ -33,15 +37,17 @@ def insert(table, id_num, name, email, password, pin, phone, friends, connection
                     + str(password)+"', "+str(pin)+", "+str(phone)+", '"+str(friends)+"', '"+str(connection)+"')")
 
 
+# Inserting a user into a table with unique ID, return True if user is new. False if not new.
 
-# Inserting a user into a table with unique ID
+
 def createUser(username, password, email):
+
     # edit the table name here if we change it in the database
-    table = "Users"
-    pin = 1234
-    phone = 1112223333
-    friends = ""
-    connectionInfo = "NoneYet"
+    # table = "Users"
+    # pin = 1234
+    # phone = 1112223333
+    # friends = ""
+    # connectionInfo = "NoneYet"
 
 
     with con:
@@ -53,7 +59,11 @@ def createUser(username, password, email):
         except TypeError:
             id = 1
 
+        if checkEmail(table, email):
+            return False
+
         insert(table, id, username, email, password, pin, phone, friends, connectionInfo)
+        return True
 
 def createSampleDemo():
     createUser("Zack", "password", "z@gmail.com")
