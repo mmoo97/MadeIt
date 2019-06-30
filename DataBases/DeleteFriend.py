@@ -1,7 +1,5 @@
-
 import sqlite3 as lite
 from CheckEmail import checkEmail
-
 
 # connect to database with sqlite
 db = "UserInfo.db"
@@ -37,5 +35,3 @@ def deleteFriend(user_email, friend_email):
 # print(deleteFriend("c@gmail.com","s@gmail.com"))
 # print(deleteFriend("c@gmail.com","i@gmail.com"))
 # print(deleteFriend("c@gmail.com","d@gmail.com"))
-
-

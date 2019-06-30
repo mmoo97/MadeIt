@@ -2,9 +2,6 @@
 # Functions will be created for all anticipated interactions
 # Please add doc strings to any added tools or updates
 
-
-# todo: Check if email already exists, if so dont allow creation
-
 import sqlite3 as lite
 from CheckEmail import checkEmail
 from Variables import *
@@ -38,14 +35,6 @@ def insert(table, id_num, name, email, password, pin, phone, friends, connection
 
 
 def createUser(username, password, email):
-
-    # edit the table name here if we change it in the database
-    # table = "Users"
-    # pin = 1234
-    # phone = 1112223333
-    # friends = ""
-    # connectionInfo = "NoneYet"
-
 
     with con:
         cur = con.cursor()

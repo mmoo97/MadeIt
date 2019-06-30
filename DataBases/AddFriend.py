@@ -1,8 +1,5 @@
-# Add a friends ID to the Frei
-
 import sqlite3 as lite
 from CheckEmail import checkEmail
-
 
 # connect to database with sqlite
 db = "UserInfo.db"
@@ -41,9 +38,3 @@ def addFriend(user_email, friend_email):
 # print(addFriend("c@gmail.com","s@gmail.com"))
 # print(addFriend("c@gmail.com","i@gmail.com"))
 # print(addFriend("c@gmail.com","d@gmail.com"))
-
-# if not friend in table - return false
-
-# if in table - get friend id - add friend id to user's friend list - return true
-
-
