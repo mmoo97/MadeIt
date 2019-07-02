@@ -27,6 +27,8 @@ There are a number of a number of file found in the folder. Their names and puro
 
 - DeleteAllFriends.py > this provides an interface used to remove all current friends from the user's friends list in database. Kind of a 'reset' for the freinds list. Current idea is that this could be performed everytime the user presses the MadeIt button.
 
+- AddPIN.py > Allows a PIN to be set to the PIN column of the passed in user.
+
 - CheckEmail.py > this checks to see if the user exists in the database using thier email as the unique identifier. If existing, the user's ID number is returned as well as thier existing status (boolean true). Though this is used more as a helper to the above mentioned, it is commonly occuring and should be noted.
 
 - UserInfo.db > is a sample database for this project. 
