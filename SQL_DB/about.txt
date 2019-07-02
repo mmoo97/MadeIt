@@ -1,5 +1,0 @@
-This is a SQL dir
-
-Dependencies:
-- sqlite3
-
