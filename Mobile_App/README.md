@@ -30,3 +30,8 @@
 - Trasfer this file to your phone via your preferred transfer method (Google Drive recommended) and open it on your phone.
 - Ensure you have Third Party Apps enabled and follow the prompts to install.
 - Lastly, simply open the app from your device's app menu.
+
+## Known Issues
+1. **Error:** "App not installed" when trying to install the apk.<br><br>
+**Fix:** Go to the **Google Play Store** -> **Play Protect** (In side Nav Drawer)
+-> **Settings** -> and disable all settings.
