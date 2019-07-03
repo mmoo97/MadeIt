@@ -22,6 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madeit.MainActivity;
 import com.example.madeit.R;
 import com.example.madeit.ui.login.LoginViewModel;
 import com.example.madeit.ui.login.LoginViewModelFactory;
@@ -74,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
+
                 finish();
             }
         });
