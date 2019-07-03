@@ -7,22 +7,26 @@
         android:title="@string/Settings"
         app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/item2"
-    android:icon="@drawable/ic_settings_black_24dp"
-    android:title="@string/login"
-    app:showAsAction="never"/>
-
-    <item android:id="@+id/item3"
+    <item android:id="@+id/custom_responses"
         android:icon="@drawable/ic_settings_black_24dp"
-        android:title="Option 3"
+        android:title="@string/custom_responses"
         app:showAsAction="never">
 
         <menu>
-            <item android:id="@+id/sub_item1"
-                android:title="Sub Item 1"/>
+            <item android:id="@+id/response_1"
+                android:title="@string/response_1"/>
 
-            <item android:id="@+id/sub_item2"
-                android:title="Sub Item 2"/>
+            <item android:id="@+id/response2"
+                android:title="@string/response_2"/>
+
+            <item android:id="@+id/response3"
+                android:title="@string/response_3"/>
+
+            <item android:id="@+id/response4"
+                android:title="@string/response_4"/>
+
+            <item android:id="@+id/response5"
+                android:title="@string/response_5"/>
         </menu>
 
     </item>
