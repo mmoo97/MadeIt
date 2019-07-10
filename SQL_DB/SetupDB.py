@@ -13,8 +13,8 @@ with con:
     cur = con.cursor()
 
     # create user table
-    cur.execute("CREATE TABLE Users(Id INT, Name TEXT, Email TEXT, Password TEXT,\
-     PIN INT, Phone INT, Friends TEXT, Connection TEXT )")
+    cur.execute("CREATE TABLE Users(Id INT, FirstName TEXT, LastName TEXT, UserName TEXT,\
+     Email TEXT, Password TEXT, PIN INT, Phone INT, Friends TEXT, Connection TEXT )")
 
     # Connection refers to the information needed to connect to the users app client
 
