@@ -10,7 +10,11 @@
  for formatting.
  
 ## Project Prerequisites
-(Edit as necessary)
+- Familiarity using Git
+- Android Studio (latest version recommended)
+- A configured Android Virstual Device (AVD)/ a Physical Android Device
+- An AWS Account
+
 ## Project Setup 
 
 1. Fork this Repository by clicking the "Fork" icon above.
