@@ -13,20 +13,20 @@ db = "UserInfo.db"
 con = lite.connect(db)
 
 
-def insert(table, id_num, name, email, password, pin, phone, friends, connection):
+def insert(table, id_num, first, last, username, email, password, pin, phone, friends, connection):
     with con:
         cur = con.cursor()
         # num = cur.execute("SELECT MAX(Id) FROM "+str(table))
         # print(num.fetchone()[0])
 
         cur.execute(
-            "INSERT INTO " + str(table) + " VALUES(" + str(id_num) + ",'" + str(name) + "', '" + str(email) + "', '"
-            + str(password) + "', " + str(pin) + ", " + str(phone) + ", '" + str(friends) + "', '" + str(
-                connection) + "')")
+            "INSERT INTO " + str(table) + " VALUES(" + str(id_num) + ", '" + str(first)+ "', '" + str(last) 
+            + "', '" + str(username) + "', '" + str(email) + "', '" + str(password) + "', " + str(pin) + ", " 
+            + str(phone) + ", '" + str(friends) + "', '" + str(connection) + "')")
 
 
-def createUser(username, password, email):
-    # edit the table name here if we change it in the database
+def createUser(first, last, username, password, email):
+    # edit the table username here if we change it in the database
     # table = "Users"
     # pin = 1234
     # phone = 1112223333
@@ -47,20 +47,20 @@ def createUser(username, password, email):
             return False
 
         # if the user isn't in db, add them
-        insert(table, id, username, email, password, pin, phone, friends, connectionInfo)
+        insert(table, id, first, last, username, email, password, pin, phone, friends, connectionInfo)
         return True
 
 
-print(createUser("Johnny", "password", "j@gmail.com"))
+# print(createUser("Johnny", "Mathis", "jmat", "password", "j@gmail.com"))
 
 
 def createSampleUsers():
-    createUser("Zack", "password", "z@gmail.com")
-    createUser("Scott", "password", "s@gmail.com")
-    createUser("Ishan", "password", "i@gmail.com")
-    createUser("Curt", "password", "c@gmail.com")
-    createUser("Daniel", "password", "d@gmail.com")
-    createUser("Mitchell", "password", "m@gmail.com")
-    createUser("Tony", "password", "t@gmail.com")
+    createUser("Zack","Attack","zatack", "password", "z@gmail.com")
+    createUser("Scott", "Bot", "sbot", "password", "s@gmail.com")
+    createUser("Ishan", "Mymon", "imon", "password", "i@gmail.com")
+    createUser("Curt", "inYurt", "curtisimo", "password", "c@gmail.com")
+    createUser("Daniel", "Spaniel", "skiman", "password", "d@gmail.com")
+    createUser("Mitchell", "Schnitzel", "itchy", "password", "m@gmail.com")
+    createUser("Tony", "de Coney", "islander"," password", "t@gmail.com")
 
 # createSampleUsers()
