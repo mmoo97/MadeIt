@@ -1,17 +1,21 @@
 #!/usr/bin/env python
 
-import sqlite3
 import json
+import sqlite3
 
+from DatabaseTools.SetFirst import setFirst
+from DatabaseTools.SetLast import setLast
+from DatabaseTools.SetUser import setUser
 
+# from DatabaseTools import SetUser
 
 jobj = {
-	"Handle": '2',
+	"Handle": '8',
 	
 	"UserInfo" : {
 	  "Id": "",
 	  "FirstName": "Daniel",	
-	  "LastName": "Lowe",
+	  "LastName": "ManLost",
 	  "UserName": "Danskiboy",
 	  "Email": "d@gmail.com",
 	  "Password": "lolol",
@@ -33,8 +37,6 @@ def handleJSON(jObject):
 	
 	userInfo = y["UserInfo"]
 	message = y["MadeItMessage"]
-
-	print(userInfo["LastName"])
 
 	if handle == 0:
 		# create a new user
@@ -64,29 +66,27 @@ def handleJSON(jObject):
 	elif handle == 5:
 		# Delete a User's account
 		print("# Delete a User's account")
-		# TODO
+
 
 	elif handle == 6:
 		# Set User's First Name
-		print("# Set User's First Name")
-		# TODO
+		# print("# Set User's First Name")
+		print(userInfo["Email"], userInfo["FirstName"])
+		setFirst(userInfo["Email"], userInfo["FirstName"])
+		
 
-	elif handle == 6:
+	elif handle == 7:
 		# Set User's Last Name
-		print("# Set User's Last Name")
-		from SetLast import setLast
-		setLast()
-		# TODO
+		# print("# Set User's Last Name")
+		print(userInfo["Email"], userInfo["LastName"])
+		setLast(userInfo["Email"], userInfo["LastName"])
 
-	elif handle == 6:
+
+	elif handle == 8:
 		# Set user's UserName
 		print("# Set user's UserName")
-		# TODO
+
+		print(userInfo["Email"], userInfo["UserName"])
+		setUser(userInfo["Email"], userInfo["UserName"])
 
 handleJSON(jobj)
-
-
-
-
-
-
