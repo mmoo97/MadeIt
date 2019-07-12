@@ -1,12 +1,11 @@
 import sqlite3 as lite
 
-from Variables import *
-from CheckEmail import checkEmail
+from .CheckEmail import checkEmail
 
 # connect to database with sqlite
 db = "UserInfo.db"
 con = lite.connect(db)
-
+table = "Users"
 
 # this function will delete the user from the database by their email
 def deleteUser(email):

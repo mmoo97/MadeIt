@@ -4,8 +4,8 @@
 
 import sqlite3 as lite
 
-from Variables import *
-from CheckEmail import checkEmail
+from .Variables import table, pin, phone, connectionInfo, friends
+from .CheckEmail import checkEmail
 
 
 # connect to database with sqlite
