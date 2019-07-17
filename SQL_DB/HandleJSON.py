@@ -12,11 +12,13 @@ from DatabaseTools.CreateUser import createUser
 from DatabaseTools.DeleteAllFriends import deleteAllFriends
 from DatabaseTools.DeleteFriend import deleteFriend
 from DatabaseTools.AddFriend import addFriend
+from DatabaseTools.SetConnection import setConnection
+from DatabaseTools.GetConnection import getConnection
 
 # from DatabaseTools import SetUser
 
 jobj = {
-	"Handle": '9',
+	"Handle": '11',
 	
 	"UserInfo" : {
 	  "Id": "",
@@ -28,7 +30,7 @@ jobj = {
 	  "PIN": "1234",
 	  "Phone": "2023034004",
 	  "Friends": "",
-	  "Connection": ""
+	  "Connection": "127.0.0.1"
 	},
 
 	"FriendEmail" : "s@gmail.com",
@@ -49,6 +51,10 @@ def handleJSON(jObject):
 	message = y["MadeItMessage"]
 	friendEmail = y["FriendEmail"]
 	friendEmailList = y["FriendEmailList"]
+
+	# always set the users IP
+	setConnection(userInfo["Email"],userInfo["Connection"])
+
 
 	if handle == 0:
 		# create a new user
@@ -103,4 +109,8 @@ def handleJSON(jObject):
 		for friend in friendEmailList:
 			deleteFriend(userInfo["Email"],friend)
 
-handleJSON(jobj)
+	elif handle == 11:
+		pass
+		# print(getConnection(userInfo["Email"]))
+
+# handleJSON(jobj)
