@@ -8,7 +8,6 @@ from DatabaseTools.SetLast import setLast
 from DatabaseTools.SetUser import setUser
 from DatabaseTools.DeleteUser import deleteUser
 from DatabaseTools.CreateUser import createUser
-
 from DatabaseTools.DeleteAllFriends import deleteAllFriends
 from DatabaseTools.DeleteFriend import deleteFriend
 from DatabaseTools.AddFriend import addFriend
@@ -45,7 +44,7 @@ def handleJSON(jObject):
 
 	# Get Data from JSON
 	handle = int(y["Handle"])
-	print("Handle # is: {}".format(handle))
+	# print("Handle # is: {}".format(handle))
 	
 	userInfo = y["UserInfo"]
 	message = y["MadeItMessage"]
@@ -67,7 +66,6 @@ def handleJSON(jObject):
 		print("# User 'MadeIt' - Contact friends")
 		# TODO
 
-
 	elif handle == 2:
 		# Add Freind to user
 		addFriend(userInfo["Email"],friendEmail)
@@ -84,16 +82,13 @@ def handleJSON(jObject):
 		# Delete a User's account
 		deleteUser(userInfo["Email"])
 
-
 	elif handle == 6:
 		# Set User's First Name
 		setFirst(userInfo["Email"], userInfo["FirstName"])
 		
-
 	elif handle == 7:
 		# Set User's Last Name
 		setLast(userInfo["Email"], userInfo["LastName"])
-
 
 	elif handle == 8:
 		# Set user's UserName
