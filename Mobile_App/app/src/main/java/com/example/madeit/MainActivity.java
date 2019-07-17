@@ -29,7 +29,13 @@ import com.example.madeit.ui.login.LoginActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.Calendar;
+import java.util.Scanner;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
@@ -69,9 +75,8 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject postData = new JSONObject();
                             try {
                                 ////todo: pull from account info
-                                postData.put("first_name", "Mitchell");
-                                postData.put("last_name", "Moore");
-                                postData.put("username", "mmoore97");
+                                postData.put("UserName", "mmoore97");
+                                postData.put("Email", "mmoore97");
                                 //todo: pull message from custom list
                                 postData.put("message", "Made it!");
                                 postData.put("mac_address", address);
@@ -79,7 +84,14 @@ public class MainActivity extends AppCompatActivity {
                                 postData.put("recipients", "usernames");
                                 postData.put("timestamp", Calendar.getInstance().getTime().toString());
 
+                                Log.i("JSON", postData.toString());
+
+                                startConnection("ec2-3-80-254-191.compute-1.amazonaws.com", 8080);
+                                sendMessage(postData.toString());
+
                             } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
                                 e.printStackTrace();
                             }
                             return null;
@@ -87,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     };
 
 
-
+                    task.execute();
 
                     String message = "Info we want to send";
 
@@ -159,4 +171,26 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    private Socket clientSocket;
+    private PrintWriter out;
+    private BufferedReader in;
+
+    public void startConnection(String ip, int port) throws IOException {
+        clientSocket = new Socket(ip, port);
+        out = new PrintWriter(clientSocket.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+    }
+
+    public String sendMessage(String msg) throws IOException {
+        out.println(msg);
+        String resp = in.readLine();
+        return resp;
+    }
+
+    public void stopConnection() throws IOException {
+        in.close();
+        out.close();
+        clientSocket.close();
+    }
+
 }
