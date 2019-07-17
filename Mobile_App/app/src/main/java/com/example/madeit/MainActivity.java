@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.madeit.ui.login.LoginActivity;
+import com.google.gson.JsonElement;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +34,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -72,22 +76,32 @@ public class MainActivity extends AppCompatActivity {
                     @SuppressLint("StaticFieldLeak") AsyncTask task = new AsyncTask() {
                         @Override
                         protected Void doInBackground(Object[] objects) {
-                            JSONObject postData = new JSONObject();
+                            JSONObject postData1 = new JSONObject();
+                            JSONObject postData2 = new JSONObject();
                             try {
                                 ////todo: pull from account info
-                                postData.put("UserName", "mmoore97");
-                                postData.put("Email", "mmoore97");
+                                postData1.put("FirstName", "Mike");
+                                postData1.put("LastName", "Hunt");
+                                postData1.put("UserName", "mmoore97");
+                                postData1.put("Email", "mmoore97");
+                                postData1.put("Password", "passwd");
+                                postData1.put("Friends", "");
                                 //todo: pull message from custom list
-                                postData.put("message", "Made it!");
-                                postData.put("mac_address", address);
                                 //todo: edit who will get message
-                                postData.put("recipients", "usernames");
-                                postData.put("timestamp", Calendar.getInstance().getTime().toString());
+                                postData1.put("connection", address);
+                                postData1.put("timestamp", Calendar.getInstance().getTime().toString());
 
-                                Log.i("JSON", postData.toString());
+                                postData2.put("Handle", "1");
+                                postData2.put("UserInfo", postData1.toString());
+                                postData2.put("FriendEmail", "test@testmail.com");
+                                String[] friends = {"test2@testmail.com", "test3@testmail.com"};
+                                postData2.put("FriendEmailList", Arrays.toString(friends));
+                                postData2.put("MadeItMessage", "ImDead");
+
+                                Log.i("JSON", postData2.toString());
 
                                 startConnection("ec2-3-80-254-191.compute-1.amazonaws.com", 8080);
-                                sendMessage(postData.toString());
+                                sendMessage(postData2.toString());
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
