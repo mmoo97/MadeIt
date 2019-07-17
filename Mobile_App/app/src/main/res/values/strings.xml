@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Madeit</string>
+    <string name="app_name">MadeIt</string>
     <string name="MadeIt_Button_info">Button to send made it message</string>
     <string name="MadeIT_Button">Made it!</string>
     <string name="Login_Signup">Login/Sign up…</string>

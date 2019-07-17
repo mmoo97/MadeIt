@@ -4,7 +4,12 @@ package com.example.madeit;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +26,11 @@ import android.widget.Toast;
 
 import com.example.madeit.ui.login.LoginActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Calendar;
+
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //check internet connection and get mac address
+        final String address;
+        WifiManager manager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo info = manager.getConnectionInfo();
+        address = info.getMacAddress();
+        //todo: flash error message to screen
+        //**************
 
         final Button Madeit = findViewById(R.id.MadeIt);
         Madeit.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +62,32 @@ public class MainActivity extends AppCompatActivity {
                 } else {
 
                     //todo: make method to gather the json info
+
+                    @SuppressLint("StaticFieldLeak") AsyncTask task = new AsyncTask() {
+                        @Override
+                        protected Void doInBackground(Object[] objects) {
+                            JSONObject postData = new JSONObject();
+                            try {
+                                ////todo: pull from account info
+                                postData.put("first_name", "Mitchell");
+                                postData.put("last_name", "Moore");
+                                postData.put("username", "mmoore97");
+                                //todo: pull message from custom list
+                                postData.put("message", "Made it!");
+                                postData.put("mac_address", address);
+                                //todo: edit who will get message
+                                postData.put("recipients", "usernames");
+                                postData.put("timestamp", Calendar.getInstance().getTime().toString());
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    };
+
+
+
 
                     String message = "Info we want to send";
 
@@ -66,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //todo: create settings menu and seperate settings screen
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
