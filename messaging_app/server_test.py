@@ -1,5 +1,6 @@
 # Python program to implement server side of chat room.
 import socket
+import json
 import select
 import sys
 from thread import *
@@ -46,12 +47,15 @@ def clientthread(conn, addr):
 	while True:
 			try:
 				message = conn.recv(2048)
-				if message:
+				if message.startswith('{'):
+					json_json = json.dumps(message)
+					print('is json')
+					print(json_json)
 
 					"""prints the message and address of the
 					user who just sent the message on the server
 					terminal"""
-					print "<" + addr[0] + "> " + message
+					print( "<" + addr[0] + "> " + message)
 
 					# Calls broadcast function to send message to all
 					message_to_send = "<" + addr[0] + "> " + message
@@ -60,7 +64,7 @@ def clientthread(conn, addr):
 				else:
 					"""message may have no content if the connection
 					is broken, in this case we remove the connection"""
-					remove(conn)
+					print( "<" + addr[0] + "> " + message)
 
 			except:
 				continue
