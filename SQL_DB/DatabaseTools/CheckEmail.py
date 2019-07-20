@@ -9,6 +9,7 @@ table = "Users"
 
 # checks if the email (and therefore user) is present in the data base (true or false)
 def checkEmail(table, email):
+    email = email.lower()
     with con:
         cur = con.cursor()
         try:

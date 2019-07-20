@@ -32,7 +32,7 @@ def createUser(first, last, username, password, email):
     # phone = 1112223333
     # friends = ""
     # connectionInfo = "NoneYet"
-
+    email = email.lower()
     with con:
         cur = con.cursor()
         # find the id number
