@@ -2,7 +2,7 @@
 
 # returns the information needed by HandleJSON to pack and send the retJSON 
 import sqlite3 as lite
-from CheckEmail import checkEmail
+from .CheckEmail import checkEmail
 
 # from .Variables import *
 
