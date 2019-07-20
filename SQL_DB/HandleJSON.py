@@ -13,6 +13,7 @@ from DatabaseTools.DeleteFriend import deleteFriend
 from DatabaseTools.AddFriend import addFriend
 from DatabaseTools.SetConnection import setConnection
 from DatabaseTools.GetConnection import getConnection
+from DatabaseTools.CheckEmail import checkEmail
 
 # from DatabaseTools import SetUser
 
@@ -39,6 +40,21 @@ jobj = {
 	"MadeItMessage" : "ImDead"
 	}
 
+# The JSON that gets sent back to app
+retJSON = {
+	"Handle":"0",
+
+	"From":{
+		"Userame":"",
+		"FirstName":"",
+		"LastName":"",
+		"Email":""
+	},
+	
+	"Message":"SentToUserByFrom"
+
+}
+
 def handleJSON(jObject):
 	y = jObject
 
@@ -51,13 +67,9 @@ def handleJSON(jObject):
 	friendEmail = y["FriendEmail"]
 	friendEmailList = y["FriendEmailList"]
 
-	# always set the users IP
-	setConnection(userInfo["Email"],userInfo["Connection"])
-
 
 	if handle == 0:
 		# create a new user
-		# print("# create a new user")
 		createUser(userInfo["FirstName"],userInfo["LastName"],userInfo["UserName"],\
 			userInfo["Password"],userInfo["Email"])
 
@@ -105,7 +117,18 @@ def handleJSON(jObject):
 			deleteFriend(userInfo["Email"],friend)
 
 	elif handle == 11:
-		pass
-		# print(getConnection(userInfo["Email"]))
+		# Sign In
+		# if user account exists return handle==3 to user  (theyre logged in)
+		if checkEmail("Users",userInfo["Email"]):
+			#Call Ishan's script to send JSON back to user
+			pass
+		# else Return Handle==2 to user  (need the create account screen)
+		else:
+			#Call Ishan's script to send JSON back to user
+			pass
+
+	# always set the users IP Connection Info
+	setConnection(userInfo["Email"],userInfo["Connection"])
+
 
 # handleJSON(jobj)
