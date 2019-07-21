@@ -14,11 +14,12 @@ from DatabaseTools.AddFriend import addFriend
 from DatabaseTools.SetConnection import setConnection
 from DatabaseTools.GetConnection import getConnection
 from DatabaseTools.CheckEmail import checkEmail
-
+from DatabaseTools.GetUserInfo import getUserInfo
+from DatabaseTools.GetFriendsInfo import getFriendInfo
 # from DatabaseTools import SetUser
 
 jobj = {
-	"Handle": '11',
+	"Handle": '1',
 	
 	"UserInfo" : {
 	  "Id": "",
@@ -41,19 +42,16 @@ jobj = {
 	}
 
 # The JSON that gets sent back to app
-retJSON = {
-	"Handle":"0",
-
-	"From":{
-		"Userame":"",
-		"FirstName":"",
-		"LastName":"",
-		"Email":""
-	},
-	
-	"Message":"SentToUserByFrom"
-
-}
+# retJSON = {
+# 	"Handle":"0",
+# 	"From":{
+# 		"Userame":"",
+# 		"FirstName":"",
+# 		"LastName":"",
+# 		"Email":""
+# 	},
+# 	"Message":"SentToUserByFrom"
+# }
 
 def handleJSON(jObject):
 	y = jObject
@@ -67,7 +65,6 @@ def handleJSON(jObject):
 	friendEmail = y["FriendEmail"]
 	friendEmailList = y["FriendEmailList"]
 
-
 	if handle == 0:
 		# create a new user
 		createUser(userInfo["FirstName"],userInfo["LastName"],userInfo["UserName"],\
@@ -75,8 +72,22 @@ def handleJSON(jObject):
 
 	elif handle == 1:
 		# User 'MadeIt' - Contact friends
-		print("# User 'MadeIt' - Contact friends")
-		# TODO
+		# try:
+		userConnection = getUserInfo(userInfo["Email"])[0]
+		fromInfo = getUserInfo(userInfo["Email"])[1]
+		friendsInfo = getFriendInfo(userInfo["Email"])
+
+		# Build retJSON
+		retJSON = {"Handle":"0","From":"{}".format(fromInfo),"Message":"{}".format(message)}
+
+		for client in friendsInfo:
+			# freind info returns list with items = tuple([friendName, friendEmail,friendConnection])
+			clientConnection = client[2]
+			print(clientConnection)
+			# TODO  - Send out retJSONs with Ishan's interface and friend info
+		# except:
+		# 	print("No Friends")
+
 
 	elif handle == 2:
 		# Add Freind to user
@@ -131,4 +142,4 @@ def handleJSON(jObject):
 	setConnection(userInfo["Email"],userInfo["Connection"])
 
 
-# handleJSON(jobj)
+handleJSON(jobj)

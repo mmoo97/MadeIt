@@ -24,8 +24,13 @@ def getFriendInfo(user_email):
             
             retList = []
 
-            friendIDs = cur.execute("SELECT Friends FROM {} WHERE Email = '{}';".format(table, user_email))
-            friendIDs = friendIDs.fetchone()[0].split("_")
+            friendIDs = cur.execute("SELECT Friends FROM {} WHERE Email = '{}';".format(table, user_email))            
+            friendIDs = friendIDs.fetchone()[0]
+            friendIDs = friendIDs.split("_")
+            
+            # if there were no friends, return empty list.
+            if friendIDs == ['']:
+                return []
 
             print(friendIDs)
             # loop over freinds and build list of tuples
