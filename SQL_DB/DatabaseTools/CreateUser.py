@@ -4,8 +4,8 @@
 
 import sqlite3 as lite
 
-from Variables import *
-from CheckEmail import checkEmail
+from .Variables import table, pin, phone, connectionInfo, friends
+from .CheckEmail import checkEmail
 
 
 # connect to database with sqlite
@@ -32,7 +32,7 @@ def createUser(first, last, username, password, email):
     # phone = 1112223333
     # friends = ""
     # connectionInfo = "NoneYet"
-
+    email = email.lower()
     with con:
         cur = con.cursor()
         # find the id number
