@@ -7,12 +7,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -45,6 +48,9 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
 
+    Menu menu;
+    SharedPreferences prefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         address = info.getMacAddress();
         //todo: flash error message to screen
         //**************
-
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         final Button Madeit = findViewById(R.id.MadeIt);
         Madeit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -100,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
 
                                 Log.i("JSON", postData2.toString());
 
-                                startConnection("ec2-3-80-254-191.compute-1.amazonaws.com", 8080);
+                                // startConnection("ec2-3-80-254-191.compute-1.amazonaws.com", 8080);
+                                startConnection(prefs.getString("ip_config", "not_set"), 8080);
                                 sendMessage(postData2.toString());
 
                             } catch (JSONException e) {
@@ -133,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.drop_menu, menu);
 
+        this.menu = menu;
+
         return true;
     }
 
@@ -148,9 +157,10 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.custom_responses:
                 Toast.makeText(this, getText(R.string.custom_responses), Toast.LENGTH_SHORT).show();
+                updateMenuTitles();
                 return true;
 
-            case R.id.response_1:
+            case R.id.response1:
                 Toast.makeText(this, getText(R.string.response_1), Toast.LENGTH_SHORT).show();
                 return true;
 
@@ -206,5 +216,20 @@ public class MainActivity extends AppCompatActivity {
         out.close();
         clientSocket.close();
     }
+
+    private void updateMenuTitles() {
+
+        MenuItem item1 = menu.findItem(R.id.response1);
+        item1.setTitle(prefs.getString("response_1", "Empty"));
+        MenuItem item2 = menu.findItem(R.id.response2);
+        item2.setTitle(prefs.getString("response_2", "Empty"));
+        MenuItem item3 = menu.findItem(R.id.response3);
+        item3.setTitle(prefs.getString("response_3", "Empty"));
+        MenuItem item4 = menu.findItem(R.id.response4);
+        item4.setTitle(prefs.getString("response_4", "Empty"));
+        MenuItem item5 = menu.findItem(R.id.response5);
+        item5.setTitle(prefs.getString("response_5", "Empty"));
+    }
+
 
 }

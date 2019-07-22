@@ -16,11 +16,18 @@
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
+    <string name="server_header">Server</string>
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
     <string name="reply_title">Default reply action</string>
     <string name="login">Login</string>
+    <string name="ip_config">Server IP Address</string>
+    <string name="custom_response1">Custom Response 1</string>
+    <string name="custom_response2">Custom Response 2</string>
+    <string name="custom_response3">Custom Response 3</string>
+    <string name="custom_response4">Custom Response 4</string>
+    <string name="custom_response5">Custom Response 5</string>
 
     <!-- Sync Preferences -->
     <string name="sync_title">Sync email periodically</string>
