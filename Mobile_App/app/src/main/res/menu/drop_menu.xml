@@ -13,7 +13,7 @@
         app:showAsAction="never">
 
         <menu>
-            <item android:id="@+id/response_1"
+            <item android:id="@+id/response1"
                 android:title="@string/response_1"/>
 
             <item android:id="@+id/response2"
