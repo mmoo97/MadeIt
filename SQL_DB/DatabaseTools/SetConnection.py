@@ -1,16 +1,16 @@
 #!/usr/bin/env python
-# script to set a new first name in database for user
+# script to set connection infor for a user in database
 import sqlite3 as lite
-from CheckEmail import checkEmail
+from .CheckEmail import checkEmail
 
-from Variables import *
+# from .Variables import *
 
 # connect to database with sqlite
 db = "UserInfo.db"
 con = lite.connect(db)
+table = "Users"
 
-
-def setFirst(user_email, first):
+def setConnection(user_email, connection):
     # table = "Users"
 
     with con:
@@ -19,7 +19,7 @@ def setFirst(user_email, first):
         if checkEmail(table, user_email)[0]:
 
             # Insert pin to 
-            cur.execute("UPDATE {} Set FirstName = {} WHERE Email = '{}';".format(table, first, user_email))
+            cur.execute("UPDATE {} Set Connection = '{}' WHERE Email = '{}';".format(table, connection, user_email))
             return True
         else:
             return False

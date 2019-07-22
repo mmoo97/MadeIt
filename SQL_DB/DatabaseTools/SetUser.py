@@ -1,16 +1,16 @@
 #!/usr/bin/env python
-# script to set a new Last name in database for user
+# script to set a new username in database for user
 import sqlite3 as lite
-from CheckEmail import checkEmail
+from .CheckEmail import checkEmail
 
-from Variables import *
+from .Variables import *
 
 # connect to database with sqlite
 db = "UserInfo.db"
 con = lite.connect(db)
+table = "Users"
 
-
-def setLast(user_email, last):
+def setUser(user_email, username):
     # table = "Users"
 
     with con:
@@ -19,10 +19,10 @@ def setLast(user_email, last):
         if checkEmail(table, user_email)[0]:
 
             # Insert pin to 
-            cur.execute("UPDATE {} Set LastName = {} WHERE Email = '{}';".format(table, last, user_email))
+            cur.execute("UPDATE {} Set UserName = '{}' WHERE Email = '{}';".format(table, username, user_email))
             return True
         else:
             return False
 
 
-# print(setLast("i@gmail.com","NewLast"))
+# print(setUser("i@gmail.com","NewUser"))

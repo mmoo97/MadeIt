@@ -1,6 +1,6 @@
 
 import sqlite3 as lite
-from CheckEmail import checkEmail
+from .CheckEmail import checkEmail
 
 
 # connect to database with sqlite
