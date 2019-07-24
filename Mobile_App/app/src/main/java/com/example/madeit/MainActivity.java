@@ -107,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
                                 Log.i("JSON", postData2.toString());
 
                                 // startConnection("ec2-3-80-254-191.compute-1.amazonaws.com", 8080);
-                                startConnection(prefs.getString("ip_config", "not_set"), 8080);
+                                startConnection(prefs.getString("ip_config", "not_set"),
+                                        Integer.parseInt(prefs.getString("port_config", "-1")));
                                 sendMessage(postData2.toString());
 
                             } catch (JSONException e) {

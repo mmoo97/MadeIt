@@ -23,6 +23,7 @@
     <string name="reply_title">Default reply action</string>
     <string name="login">Login</string>
     <string name="ip_config">Server IP Address</string>
+    <string name="port_config">Server Port</string>
     <string name="custom_response1">Custom Response 1</string>
     <string name="custom_response2">Custom Response 2</string>
     <string name="custom_response3">Custom Response 3</string>
