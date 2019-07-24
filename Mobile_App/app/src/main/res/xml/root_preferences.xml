@@ -14,7 +14,8 @@
   ~ limitations under the License.
   -->
 
-<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory app:title="@string/messages_header">
 
@@ -79,6 +80,13 @@
             app:key="ip_config"
             app:title="@string/ip_config"
             app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:key="port_config"
+            app:title="@string/port_config"
+            app:useSimpleSummaryProvider="true"
+            android:numeric="integer"
+            android:maxLength="5"/>
 
     </PreferenceCategory>
 
