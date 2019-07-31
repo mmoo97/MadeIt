@@ -1,22 +1,17 @@
 package com.example.madeit;
 
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
-
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -24,11 +19,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.preference.PreferenceManager;
+
 import com.example.madeit.ui.login.LoginActivity;
-import com.google.gson.JsonElement;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,14 +37,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Scanner;
-
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,6 +50,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        createNotificationChannel();
+
+        final NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "Noice")
+                .setSmallIcon(R.drawable.ic_airport_shuttle_black_24dp)
+                .setContentTitle("MadeIt")
+                .setColor(getResources().getColor(R.color.colorPrimary))
+                .setContentText("Much longer text that cannot fit one line...")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Much longer text that cannot fit one line..."))
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setPriority(NotificationCompat.PRIORITY_MAX);
 
         //check internet connection and get mac address
         final String address;
@@ -73,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent2 = new Intent(MainActivity.this, LoginActivity.class);
                     intent2.putExtra("info", 0);
                     startActivityForResult(intent2, 1);
-                    Toast.makeText(MainActivity.this, "Login", Toast.LENGTH_SHORT).show();
 
                 } else {
 
@@ -127,7 +133,13 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.i("Info", message);
 
-                    Toast.makeText(MainActivity.this, "The button works!", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(MainActivity.this, "MadeIt", Toast.LENGTH_SHORT).show();
+                    if (prefs.getString("response_1", "Empty").equals("notification")) {
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
+
+                        // notificationId is a unique int for each notification that you must define
+                        notificationManager.notify(24, builder.build());
+                    }
                 }
             }
         });
@@ -153,11 +165,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.settings:
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
-                Toast.makeText(this, "Settings Menu", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.custom_responses:
-                Toast.makeText(this, getText(R.string.custom_responses), Toast.LENGTH_SHORT).show();
                 updateMenuTitles();
                 return true;
 
@@ -230,6 +240,23 @@ public class MainActivity extends AppCompatActivity {
         item4.setTitle(prefs.getString("response_4", "Empty"));
         MenuItem item5 = menu.findItem(R.id.response5);
         item5.setTitle(prefs.getString("response_5", "Empty"));
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "hey";
+            String description = "dude";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("Noice", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            assert notificationManager != null;
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 
