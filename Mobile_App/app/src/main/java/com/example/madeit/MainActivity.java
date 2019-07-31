@@ -134,12 +134,12 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("Info", message);
 
                     // Toast.makeText(MainActivity.this, "MadeIt", Toast.LENGTH_SHORT).show();
+                    if (prefs.getString("response_1", "Empty").equals("notification")) {
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
 
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
-
-                    // notificationId is a unique int for each notification that you must define
-                    notificationManager.notify(24, builder.build());
-
+                        // notificationId is a unique int for each notification that you must define
+                        notificationManager.notify(24, builder.build());
+                    }
                 }
             }
         });
