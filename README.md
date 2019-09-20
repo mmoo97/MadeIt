@@ -4,16 +4,14 @@
 
 ## Communication
 
- [Check out the [Slack Channel](https://groupbean.slack.com/)]
+ [Download the [Telegram App](https://telegram.org)]
  - To edit the README.md file, checkout
  [this page](https://help.github.com/en/articles/basic-writing-and-formatting-syntax#lists)
  for formatting.
  
 ## Project Prerequisites
 - Familiarity using Git
-- Android Studio (latest version recommended)
-- A configured Android Virstual Device (AVD)/ a Physical Android Device
-- An AWS Account
+
 
 ## Project Setup 
 
