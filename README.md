@@ -1,6 +1,12 @@
 # SU2019-CS-403-RF-Cloud-Computing
 
+## Screenshots
 
+![Main Menu](img/main.png)
+![Menu 1](img/main1.png)
+![Menu 2](img/menu2.png)
+![Logged In](img/logged_in.png)
+![Notification](img/notification.png)
 
 ## Communication
 
